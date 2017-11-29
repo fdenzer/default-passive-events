@@ -7,6 +7,9 @@ const defaultOptions = {
 
 const overwriteAddEvent = (superMethod) => {
   EventTarget.prototype.addEventListener = function(type, listener, options) {
+    const validTypes = ['scroll', 'touchstart', 'click'];
+
+    if (!validTypes.includes(type)) return;
     const usesListenerOptions = typeof options === 'object';
     const useCapture = usesListenerOptions ? options.capture : options;
 
